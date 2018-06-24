@@ -15,10 +15,13 @@ class CreateFixturesTable extends Migration
     {
         Schema::create('fixtures', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('group_id');
-            $table->string('team_id_one');
-            $table->string('team_id_two');
-            $table->string('time');
+            $table->string('group_id')->default('0')->nullable();
+            $table->string('pitch_id')->nullable();
+            $table->string('team_one_id')->nullable();
+            $table->string('team_two_id')->nullable();
+            $table->string('date')->nullable();
+            $table->string('time_start')->nullable();
+            $table->string('time_end')->nullable();
             $table->timestamps();
         });
     }

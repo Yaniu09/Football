@@ -2,6 +2,9 @@
 
 use App\Group;
 use App\Teams;
+use App\Fixtures;
+use App\Pitch;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +19,25 @@ use App\Teams;
 
 Route::get('/', function () {
     $groups = Group::all();
-    foreach ($groups as $group) {
-        # code...
-    }
-    $groupa = Teams::where('group_id' , 1)->get();
-    $groupb = Teams::where('group_id' , 2)->get();
-    $groupc = Teams::where('group_id' , 3)->get();
-    $groupd = Teams::where('group_id' , 4)->get();
-    return view('welcome',compact('groups','groupa','groupb','groupc','groupd   '));
+    return view('welcome', compact('groups'));
+});
+
+Route::get('/fixtures', function () {
+    $fixtures = Fixtures::all();
+    $groups = Group::all();
+    $pitches = Pitch::all();
+    return view('fixture', compact('fixtures', 'groups', 'pitches'));
+});
+
+Route::post('/fixtures', function (Request $request) {
+    $fixture = new Fixtures;
+    $fixture->pitch_id = $request->pitch_id;
+    $fixture->team_one_id = $request->team_one_id;
+    $fixture->team_two_id = $request->team_two_id;
+    $fixture->date = $request->date;
+    $fixture->time_start = $request->time_start;
+    $fixture->time_end = $request->time_end;
+    $fixture->save();
+
+    return redirect('fixtures')->with('alert-success', 'Successfully added match fixtures');
 });
