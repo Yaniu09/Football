@@ -16,9 +16,12 @@ use App\Teams;
 
 Route::get('/', function () {
     $groups = Group::all();
+    foreach ($groups as $group) {
+        # code...
+    }
     $groupa = Teams::where('group_id' , 1)->get();
     $groupb = Teams::where('group_id' , 2)->get();
     $groupc = Teams::where('group_id' , 3)->get();
     $groupd = Teams::where('group_id' , 4)->get();
-    return view('welcome',compact('groups','groupa','groupb','groupc','groupd'));
+    return view('welcome',compact('groups','groupa','groupb','groupc','groupd   '));
 });
