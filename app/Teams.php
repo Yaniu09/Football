@@ -10,4 +10,9 @@ class Teams extends Model
     {
         return $this->belongsTo('App\Group');
     }
+
+    public function standing()
+    {
+        return $this->hasOne('App\Standings', 'team_id');
+    }
 }

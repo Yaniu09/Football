@@ -46,14 +46,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($group->teams as $team)    
+                    @foreach ($group->teams as $team)
                     <tr>
                       <th scope="row">{{ $team->name }}</th>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
-                      <td>0</td>
+                      <td>{{ $team->standing->mp }}</td>
+                      <td>{{ $team->standing->gf }}</td>
+                      <td>{{ $team->standing->ga }}</td>
+                      <td>{{ $team->standing->gd }}</td>
+                      <td>{{ $team->standing->pts }}</td>
                     </tr>
                     @endforeach
                 </tbody>

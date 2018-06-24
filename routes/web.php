@@ -4,6 +4,8 @@ use App\Group;
 use App\Teams;
 use App\Fixtures;
 use App\Pitch;
+use App\Standings;
+use App\Score;
 use Illuminate\Http\Request;
 
 /*
@@ -20,6 +22,22 @@ use Illuminate\Http\Request;
 Route::get('/', function () {
     $groups = Group::all();
     return view('welcome', compact('groups'));
+});
+
+Route::get('/create-standings', function () {
+    $groups = Group::all();
+    foreach ($groups as $group) {
+        foreach ($group->teams as $team) {
+            $standing = new Standings;
+            $standing->group_id = $group->id;
+            $standing->team_id = $team->id;
+            $standing->save();
+        }
+    }
+});
+
+Route::get('/standings', function () {
+    return Standings::all();
 });
 
 Route::get('/fixtures', function () {
@@ -40,4 +58,68 @@ Route::post('/fixtures', function (Request $request) {
     $fixture->save();
 
     return redirect('fixtures')->with('alert-success', 'Successfully added match fixtures');
+});
+
+Route::get('/add-score/{fixture_id}/{score_1}/{score_2}', function ($fixture_id, $score_1, $score_2) {
+    // $fixture_id = $request->fixture_id;
+    // $score_1 = $request->score_1;
+    // $score_2 = $request->score_2;
+
+    $score = new Score;
+    $score->fixture_id = $fixture_id;
+    $score->team_one = $score_1;
+    $score->team_two = $score_2;
+    if ($score_1 == $score_2) {
+        $score->draw = '1';
+    }
+    $score->save();
+
+    $fixture = $score->fixture;
+    $standing_one = Standings::find($fixture->team_one_id);
+    $standing_one->mp += 1;
+    if ($score_1 > $score_2) {
+        $standing_one->w += 1;
+    }
+    if ($score_1 == $score_2) {
+        $standing_one->d += 1;
+    }
+    if ($score_1 < $score_2) {
+        $standing_one->l += 1;
+    }
+    $standing_one->gf += $score_1;
+    $standing_one->ga += $score_2;
+    $standing_one->save();
+
+    // ------------------------------------------- //
+
+    $standing_two = Standings::find($fixture->team_two_id);
+    $standing_two->mp += 1;
+    if ($score_1 > $score_2) {
+        $standing_two->w += 1;
+    }
+    if ($score_1 == $score_2) {
+        $standing_two->d += 1;
+    }
+    if ($score_1 < $score_2) {
+        $standing_two->l += 1;
+    }
+    $standing_two->gf += $score_1;
+    $standing_two->ga += $score_2;
+    $standing_two->save();
+
+    return redirect('table-update');
+});
+
+Route::get('/table-update', function(){
+    $standings = Standings::all();
+    foreach ($standings as $standing) {
+        $standing->gd = $standing->gf - $standing->ga;
+        $standing->pts = ($standing->w * 3) + $standing->d;
+        $standing->save();
+
+        $team = Teams::find($standing->team_id);
+        $team->pts = $standing->pts;
+        $team->save();
+    }
+    return redirect('/');
 });

@@ -8,6 +8,6 @@ class Group extends Model
 {
     public function teams()
     {
-        return $this->hasMany('App\Teams', 'group_id');
+        return $this->hasMany('App\Teams', 'group_id')->orderBy('pts', 'desc');
     }
 }
