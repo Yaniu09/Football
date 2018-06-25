@@ -42,7 +42,7 @@
             </div>
             <div class="form-group">
               <label for="title">Jersy Number</label>
-              <input type="text" class="form-control" id="number" name="number">
+              <input type="text" value="{{ $players->number }}" class="form-control" id="number" name="number">
             </div>
             <select name="position" >
             <option value="GK">GK</option>
@@ -50,7 +50,7 @@
             <option value="MD">MD</option>
             <option value="AT">AT</option>
             </select>
-             <div class="form-group">
+             {{-- <div class="form-group">
               <label for="title">Yellow Cards</label>
               <input type="text" class="form-control" id="yellow" name="yellow">
             </div>
@@ -66,7 +66,7 @@
               <label for="title">Assists Scored</label>
               <input type="text" class="form-control" id="assists" name="assists">
             </div>
-            <div class="form-group">
+            <div class="form-group"> --}}
               <button type="submit" class="btn btn-primary">Submit</button>
             </div>
             
