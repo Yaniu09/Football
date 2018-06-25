@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
 use App\Fixtures;
+use App\Pitch;
 use Illuminate\Http\Request;
 
 class FixturesController extends Controller
@@ -57,7 +59,9 @@ class FixturesController extends Controller
      */
     public function edit(Fixtures $fixtures)
     {
-        return view('fixtures.edit', compact('fixtures'));
+        $groups = Group::all();
+        $pitches = Pitch::all();
+        return view('fixtures.edit', compact('fixtures', 'groups', 'pitches'));
     }
 
     /**
