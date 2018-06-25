@@ -68,6 +68,10 @@ Route::post('/fixtures', function (Request $request) {
 Route::get('/fixtures/edit/{fixtures}', 'FixturesController@edit');
 Route::post('/fixtures/edit/{fixtures}', 'FixturesController@update');
 
+Route::get('/players/edit/{player}', 'PlayerController@edit');
+Route::post('/players/edit/{player}', 'PlayerController@update');
+
+
 Route::get('/players', function () {
     $groups = Group::all();
     return view('players', compact('groups'));
