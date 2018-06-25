@@ -57,7 +57,7 @@ class FixturesController extends Controller
      */
     public function edit(Fixtures $fixtures)
     {
-        //
+        return view('fixtures.edit', compact('fixtures'));
     }
 
     /**
@@ -69,7 +69,15 @@ class FixturesController extends Controller
      */
     public function update(Request $request, Fixtures $fixtures)
     {
-        //
+        $fixture->pitch_id = $request->pitch_id;
+        $fixture->team_one_id = $request->team_one_id;
+        $fixture->team_two_id = $request->team_two_id;
+        $fixture->date = $request->date;
+        $fixture->time_start = $request->time_start;
+        $fixture->time_end = $request->time_end;
+        $fixture->save();
+
+        return redirect()->back()->with('alert-success', 'Successfully edited match fixtures');
     }
 
     /**
