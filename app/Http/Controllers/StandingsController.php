@@ -14,7 +14,7 @@ class StandingsController extends Controller
      */
     public function index()
     {
-        //
+        return Standings::all();
     }
 
     /**
@@ -24,7 +24,15 @@ class StandingsController extends Controller
      */
     public function create()
     {
-        //
+        $groups = Group::all();
+        foreach ($groups as $group) {
+            foreach ($group->teams as $team) {
+                $standing = new Standings;
+                $standing->group_id = $group->id;
+                $standing->team_id = $team->id;
+                $standing->save();
+            }
+        }
     }
 
     /**
@@ -35,7 +43,7 @@ class StandingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -81,5 +89,20 @@ class StandingsController extends Controller
     public function destroy(Standings $standings)
     {
         //
+    }
+
+    public function table_update()
+    {
+        $standings = Standings::all();
+        foreach ($standings as $standing) {
+            $standing->gd = $standing->gf - $standing->ga;
+            $standing->pts = ($standing->w * 3) + $standing->d;
+            $standing->save();
+
+            $team = Teams::find($standing->team_id);
+            $team->pts = $standing->pts;
+            $team->save();
+        }
+        return redirect('/');
     }
 }

@@ -24,7 +24,8 @@ class PlayerController extends Controller
      */
     public function create()
     {
-        //
+        $groups = Group::all();
+        return view('players', compact('groups'));
     }
 
     /**
@@ -35,7 +36,18 @@ class PlayerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $player = new Player;
+        $player->team_id = $request->team_id;
+        $player->name = $request->name;
+        $player->number = $request->number;
+        $player->position = $request->position;
+        // $player->yellow = $request->yellow;
+        // $player->red = $request->red;
+        // $player->goals = $request->goals;
+        // $player->assists = $request->assists;
+        $player->save();
+
+        return redirect('players')->with('alert-success', 'Successfully added player');
     }
 
     /**

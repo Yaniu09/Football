@@ -82,4 +82,55 @@ class ScoreController extends Controller
     {
         //
     }
+
+    public function add_score($fixture_id, $score_1, $score_2)
+    {
+        // $fixture_id = $request->fixture_id;
+        // $score_1 = $request->score_1;
+        // $score_2 = $request->score_2;
+
+        $score = new Score;
+        $score->fixture_id = $fixture_id;
+        $score->team_one = $score_1;
+        $score->team_two = $score_2;
+        if ($score_1 == $score_2) {
+            $score->draw = '1';
+        }
+        $score->save();
+
+        $fixture = $score->fixture;
+        $standing_one = Standings::find($fixture->team_one_id);
+        $standing_one->mp += 1;
+        if ($score_1 > $score_2) {
+            $standing_one->w += 1;
+        }
+        if ($score_1 == $score_2) {
+            $standing_one->d += 1;
+        }
+        if ($score_1 < $score_2) {
+            $standing_one->l += 1;
+        }
+        $standing_one->gf += $score_1;
+        $standing_one->ga += $score_2;
+        $standing_one->save();
+
+        // ------------------------------------------- //
+
+        $standing_two = Standings::find($fixture->team_two_id);
+        $standing_two->mp += 1;
+        if ($score_1 > $score_2) {
+            $standing_two->w += 1;
+        }
+        if ($score_1 == $score_2) {
+            $standing_two->d += 1;
+        }
+        if ($score_1 < $score_2) {
+            $standing_two->l += 1;
+        }
+        $standing_two->gf += $score_1;
+        $standing_two->ga += $score_2;
+        $standing_two->save();
+
+        return redirect('table-update');
+    }
 }

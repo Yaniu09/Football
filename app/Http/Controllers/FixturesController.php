@@ -16,7 +16,12 @@ class FixturesController extends Controller
      */
     public function index()
     {
-        //
+        $data = Fixtures::all();
+        $dates = $data->groupBy('date');
+        // dd($dates->toArray());
+        $groups = Group::all();
+        $pitches = Pitch::all();
+        return view('fixture', compact('dates', 'fixtures', 'groups', 'pitches'));
     }
 
     /**
@@ -37,7 +42,16 @@ class FixturesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fixture = new Fixtures;
+        $fixture->pitch_id = $request->pitch_id;
+        $fixture->team_one_id = $request->team_one_id;
+        $fixture->team_two_id = $request->team_two_id;
+        $fixture->date = $request->date;
+        $fixture->time_start = $request->time_start;
+        $fixture->time_end = $request->time_end;
+        $fixture->save();
+
+        return redirect('fixtures')->with('alert-success', 'Successfully added match fixtures');
     }
 
     /**
