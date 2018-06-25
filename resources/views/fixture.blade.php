@@ -21,50 +21,68 @@
 					@endforeach
 				</div>
 			</div>
-			
 			@foreach ($dates as $date)
 				<div class="card-body">
 					<div class="card-header">
 						{{ Carbon\Carbon::createFromFormat('d/m/Y', $date[0]->date)->format('l j F') }}
 					</div>
 					@foreach ($date as $fixture)
-						{{-- 
-							<h6 class="card-title">FT</h6>
-							<h5 class="card-title">{{ $fixture->team1->name }} |  <span> 0 - 0 </span>  | {{ $fixture->team2->name }}</h5>
-							<p class="card-text">{{ $fixture->date }} | {{ $fixture->time_start }} - {{ $fixture->time_end }} | {{ $fixture->pitch->name }}</p>
-						 --}}
 						<div class="fixture">
-							<div class="row">
-								<div class="col-lg-2">
-									<p class="card-text">
-										{{ Carbon\Carbon::createFromFormat('d/m/Y', $date[0]->date)->format('l j F') }} @ {{ $fixture->time_start }} <br>
-										{{ $fixture->team1->group->name }} <br>
-										{{ $fixture->pitch->name }}
-									</p>
-								</div>
-								<div class="col-lg-10">
-									<span class="align-middle">
-										<div class="row">
-											<div class="col-lg-5 text-right">
-												<span style="font-size: calc(15px + (100vw - 1024px) / (1200 - 1024) * (21 - 18))">{{ $fixture->team1->name }}</span>
-											</div>
-											<div class="col-lg-1">
-												<span style="font-size: calc(15px + (100vw - 1024px) / (1200 - 1024) * (21 - 18))">0 - 0</span>
-											</div>
-											<div class="col-lg-5">
-												<span style="font-size: calc(15px + (100vw - 1024px) / (1200 - 1024) * (21 - 18))">{{ $fixture->team2->name }}</span>
-											</div>
-										</div>
-									</span>
-								</div>
-							</div>
+							<table class="table table-bordered">
+								<tr class="row">
+									<td class="col-lg-1">
+										<p class="card-text">
+											{{ Carbon\Carbon::createFromFormat('d/m/Y', $date[0]->date)->format('l j F') }} @ {{ $fixture->time_start }} <br>
+											{{ $fixture->team1->group->name }} <br>
+											{{ $fixture->pitch->name }}
+										</p>
+									</td>
+									<td class="col-lg-5">
+										<span style="font-size: calc(15px + (100vw - 1024px) / (1200 - 1024) * (21 - 18))">{{ $fixture->team1->name }}</span>
+									</td>
+									<td class="col-lg-1">
+										<span style="font-size: calc(15px + (100vw - 1024px) / (1200 - 1024) * (21 - 18))">0 - 0</span>
+									</td>
+									<td class="col-lg-5">
+										<span style="font-size: calc(15px + (100vw - 1024px) / (1200 - 1024) * (21 - 18))">{{ $fixture->team2->name }}</span>
+									</td>
+								</tr>
+							</table>
 						</div>
 						<hr>
 					@endforeach
 				</div>
 			@endforeach
 		</div>
-    </section>
+	</section>
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="flash-message">
+					@foreach (['danger', 'warning', 'success', 'info'] as $msg)
+						@if(Session::has('alert-' . $msg))
+
+						<p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+
+						@endif
+					@endforeach
+				</div>
+			</div>
+
+			@foreach ($dates as $date)
+			<div class="card">
+				<div class="card-header">
+					{{ Carbon\Carbon::createFromFormat('d/m/Y', $date[0]->date)->format('l j F') }}
+				</div>
+				<div class="card-body">
+					<h5 class="card-title"></h5>
+
+				</div>
+			</div>
+			@endforeach
+		</div>
+	</section>
 
 
     <div class="modal" id="add" tabindex="-1" role="dialog">
