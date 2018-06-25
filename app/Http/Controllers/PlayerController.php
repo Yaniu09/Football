@@ -57,7 +57,7 @@ class PlayerController extends Controller
      */
     public function edit(Player $player)
     {
-        //
+        return view('player.edit', compact('player'));
     }
 
     /**
@@ -69,7 +69,16 @@ class PlayerController extends Controller
      */
     public function update(Request $request, Player $player)
     {
-        //
+        $player->team_id = $request->team_id;
+        $player->name = $request->name;
+        $player->number = $request->number;
+        $player->position = $request->position;
+        // $player->yellow = $request->yellow;
+        // $player->red = $request->red;
+        // $player->goals = $request->goals;
+        // $player->assists = $request->assists;
+        $player->save();
+        return redirect()->back()->with('alert-success', 'Successfully edited match fixtures');
     }
 
     /**
