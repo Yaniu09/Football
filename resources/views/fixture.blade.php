@@ -25,7 +25,7 @@
 			@foreach ($dates as $date)
 				<div class="card-body">
 					<div class="card-header">
-						{{ $date[0]->date }}
+						{{ Carbon\Carbon::createFromFormat('d/m/Y', $date[0]->date)->format('l j F') }}
 					</div>
 					@foreach ($date as $fixture)
 						<center>
