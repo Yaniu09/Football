@@ -28,11 +28,26 @@
 						{{ Carbon\Carbon::createFromFormat('d/m/Y', $date[0]->date)->format('l j F') }}
 					</div>
 					@foreach ($date as $fixture)
-						<center>
+						{{-- 
 							<h6 class="card-title">FT</h6>
 							<h5 class="card-title">{{ $fixture->team1->name }} |  <span> 0 - 0 </span>  | {{ $fixture->team2->name }}</h5>
 							<p class="card-text">{{ $fixture->date }} | {{ $fixture->time_start }} - {{ $fixture->time_end }} | {{ $fixture->pitch->name }}</p>
-						</center>
+						 --}}
+						<div class="fixture">
+							<div class="row">
+								<div class="col-lg-2">
+									{{ Carbon\Carbon::createFromFormat('d/m/Y', $date[0]->date)->format('l j F') }} @ {{ $fixture->time_start }} <br>
+									{{ $fixture->team1->group->name }} <br>
+									{{ $fixture->pitch->name }}
+								</div>
+								<div class="col-lg-10">
+									<center>
+										<h6 class="card-title">FT</h6>
+										<h5 class="card-title">{{ $fixture->team1->name }} |  <span> 0 - 0 </span>  | {{ $fixture->team2->name }}</h5>	
+									</center>
+								</div>
+							</div>
+						</div>
 						<hr>
 					@endforeach
 				</div>
