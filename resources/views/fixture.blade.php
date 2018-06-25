@@ -40,18 +40,16 @@
 				@endforeach
 			</div>
 		</div>
-        <div class="row">
-			<div class="col-lg-12">
-				<center>
-					@foreach ($fixtures as $fixture)
-						<div class="row">
-						<span>{{ $fixture->team1->name }}</span> VS <span>{{ $fixture->team2->name }}</span>
-						</div>
-					@endforeach
-				</center>
-			</div>
+        
         </div>
-      </div>
+			</div>
+			<div class="card-body">
+					@foreach ($fixtures as $fixture)
+					<h6 class="card-title">FT</h6>
+					<h5 class="card-title">{{ $fixture->team1->name }} |  <span> 0 - 0 </span>  | {{ $fixture->team2->name }}</h5>
+					<p class="card-text">{{ $fixture->date }} | {{ $fixture->time_start }} - {{ $fixture->time_end }} | {{ $fixture->pitch->name }}</p>
+					@endforeach
+					</div>
     </section>
 
 

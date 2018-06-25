@@ -21,7 +21,9 @@ use Illuminate\Http\Request;
 
 Route::get('/', function () {
     $groups = Group::all();
-    return view('welcome', compact('groups'));
+    $fixtures = Fixtures::all();
+    
+    return view('welcome', compact('groups','fixtures'));
 });
 
 Route::get('/create-standings', function () {

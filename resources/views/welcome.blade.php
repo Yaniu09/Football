@@ -9,7 +9,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Metro Thing</title>
+    <title>METRO FUTSAL CUP</title>
+    <style>
+      
+      </style>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -21,15 +24,40 @@
 
   <body id="page-top">
     @include('partials.header')
-    <header class="bg-primary text-white">
+    <header class="bg-dark text-white header">
       <div class="container text-center">
-        <h1>Tournament Standings</h1>
         <p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
       </div>
-    </header>
+    </header> 
+        <div class="card text-center">
+            <div class="card-header">
+                <center>
+                <ul class="nav nav-pills card-header-pills">
+                  
+                      <li class="nav-item">
+                          <a class="nav-link active" href="#">Group Stage Fixtures</a>
+                        </li>
+                        {{-- <li class="nav-item">
+                          <a class="nav-link" href="#">Knockout Stage Fixtures</a>
+                        </li> --}}
+                  
+                </ul>
+              </center>
+              </div>
+            <div class="card-body">
+            @foreach ($fixtures as $fixture)
+            <h6 class="card-title">FT</h6>
+            <h5 class="card-title">{{ $fixture->team1->name }} |  <span> 0 - 0 </span>  | {{ $fixture->team2->name }}</h5>
+            <p class="card-text">{{ $fixture->date }} | {{ $fixture->time_start }} - {{ $fixture->time_end }} | {{ $fixture->pitch->name }}</p>
+            @endforeach
+            </div>
+          </div>
 
-    <section id="about">
+    <section id="standings">
       <div class="container">
+          <div class="container text-center">
+          <h1>Tournament Standings</h1>
+          </div>
         <div class="row">
           <div class="col-lg-8 mx-auto">
             @foreach ($groups as $group)

@@ -15,4 +15,9 @@ class Fixtures extends Model
     {
         return $this->belongsTo('App\Teams', 'team_two_id');
     }
+
+    public function pitch()
+    {
+        return $this->belongsTo('App\Pitch', 'pitch_id');
+    }
 }
