@@ -11,6 +11,15 @@
   <section id="standings">
     <div class="container">
         <div class="container text-center">
+            <div class="flash-message">
+                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                  @if(Session::has('alert-' . $msg))
+      
+                  <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+      
+                  @endif
+                @endforeach
+              </div>
         <h1>Add New Payers</h1>
         </div>
       <div class="row">
