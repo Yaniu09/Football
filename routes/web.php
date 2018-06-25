@@ -64,6 +64,28 @@ Route::post('/fixtures', function (Request $request) {
     return redirect('fixtures')->with('alert-success', 'Successfully added match fixtures');
 });
 
+Route::get('/players', function () {
+    $groups = Group::all();
+    return view('players', compact('groups'));
+});
+
+
+Route::post('/players', function (Request $request) {
+    $player = new Player;
+    $player->team_id = $request->team_id;
+    $player->name = $request->name;
+    $player->number = $request->number;
+    $player->position = $request->position;
+    $player->yellow = $request->yellow;
+    $player->red = $request->red;
+    $player->goals = $request->goals;
+    $player->assists = $request->assists;
+    $player->save();
+
+    return redirect('players')->with('alert-success', 'Successfully added player');
+});
+
+
 Route::get('/add-score/{fixture_id}/{score_1}/{score_2}', function ($fixture_id, $score_1, $score_2) {
     // $fixture_id = $request->fixture_id;
     // $score_1 = $request->score_1;
