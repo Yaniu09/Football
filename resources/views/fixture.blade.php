@@ -9,26 +9,35 @@
     </header>
 
     <section id="about">
-      <div class="container">
-				<div class="row">
-					<div class="flash-message">
-						@foreach (['danger', 'warning', 'success', 'info'] as $msg)
-							@if(Session::has('alert-' . $msg))
+      	<div class="container">
+			<div class="row">
+				<div class="flash-message">
+					@foreach (['danger', 'warning', 'success', 'info'] as $msg)
+						@if(Session::has('alert-' . $msg))
 
-							<p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+						<p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
 
-							@endif
-						@endforeach
-					</div>
+						@endif
+					@endforeach
 				</div>
 			</div>
-			<div class="card-body">
-				@foreach ($fixtures as $fixture)
-					<h6 class="card-title">FT</h6>
-					<h5 class="card-title">{{ $fixture->team1->name }} |  <span> 0 - 0 </span>  | {{ $fixture->team2->name }}</h5>
-					<p class="card-text">{{ $fixture->date }} | {{ $fixture->time_start }} - {{ $fixture->time_end }} | {{ $fixture->pitch->name }}</p>
-				@endforeach
-			</div>
+			
+			@foreach ($dates as $date)
+				<div class="card-body">
+					<div class="card-header">
+						{{ $date[0]->date }}
+					</div>
+					@foreach ($date as $fixture)
+						<center>
+							<h6 class="card-title">FT</h6>
+							<h5 class="card-title">{{ $fixture->team1->name }} |  <span> 0 - 0 </span>  | {{ $fixture->team2->name }}</h5>
+							<p class="card-text">{{ $fixture->date }} | {{ $fixture->time_start }} - {{ $fixture->time_end }} | {{ $fixture->pitch->name }}</p>
+						</center>
+						<hr>
+					@endforeach
+				</div>
+			@endforeach
+		</div>
     </section>
 
 

@@ -26,6 +26,15 @@ Route::get('/', function () {
     return view('welcome', compact('groups','fixtures'));
 });
 
+Route::get('/fixtures', function () {
+    $data = Fixtures::all();
+    $dates = $data->groupBy('date');
+    // dd($dates->toArray());
+    $groups = Group::all();
+    $pitches = Pitch::all();
+    return view('fixture', compact('dates', 'fixtures', 'groups', 'pitches'));
+});
+
 Route::get('/create-standings', function () {
     $groups = Group::all();
     foreach ($groups as $group) {
@@ -40,13 +49,6 @@ Route::get('/create-standings', function () {
 
 Route::get('/standings', function () {
     return Standings::all();
-});
-
-Route::get('/fixtures', function () {
-    $fixtures = Fixtures::all();
-    $groups = Group::all();
-    $pitches = Pitch::all();
-    return view('fixture', compact('fixtures', 'groups', 'pitches'));
 });
 
 Route::post('/fixtures', function (Request $request) {
