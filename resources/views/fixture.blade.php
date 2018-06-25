@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+	<link href="/css/fixture.css" rel="stylesheet">
+@endsection
+
 @section('content')
     <header class="bg-primary text-white">
 			<div class="container text-center">
@@ -7,54 +11,6 @@
 				<p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
 			</div>
     </header>
-
-    <section id="about">
-      	<div class="container">
-			<div class="row">
-				<div class="flash-message">
-					@foreach (['danger', 'warning', 'success', 'info'] as $msg)
-						@if(Session::has('alert-' . $msg))
-
-						<p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
-
-						@endif
-					@endforeach
-				</div>
-			</div>
-			@foreach ($dates as $date)
-				<div class="card-body">
-					<div class="card-header">
-						{{ Carbon\Carbon::createFromFormat('d/m/Y', $date[0]->date)->format('l j F') }}
-					</div>
-					@foreach ($date as $fixture)
-						<div class="fixture">
-							<table class="table table-bordered">
-								<tr class="row">
-									<td class="col-lg-1">
-										<p class="card-text">
-											{{ Carbon\Carbon::createFromFormat('d/m/Y', $date[0]->date)->format('l j F') }} @ {{ $fixture->time_start }} <br>
-											{{ $fixture->team1->group->name }} <br>
-											{{ $fixture->pitch->name }}
-										</p>
-									</td>
-									<td class="col-lg-5">
-										<span style="font-size: calc(15px + (100vw - 1024px) / (1200 - 1024) * (21 - 18))">{{ $fixture->team1->name }}</span>
-									</td>
-									<td class="col-lg-1">
-										<span style="font-size: calc(15px + (100vw - 1024px) / (1200 - 1024) * (21 - 18))">0 - 0</span>
-									</td>
-									<td class="col-lg-5">
-										<span style="font-size: calc(15px + (100vw - 1024px) / (1200 - 1024) * (21 - 18))">{{ $fixture->team2->name }}</span>
-									</td>
-								</tr>
-							</table>
-						</div>
-						<hr>
-					@endforeach
-				</div>
-			@endforeach
-		</div>
-	</section>
 	
 	<section>
 		<div class="container">
@@ -77,7 +33,32 @@
 				</div>
 				<div class="card-body">
 					<h5 class="card-title"></h5>
-
+					@foreach ($date as $fixture)
+						<div class="fixture">
+							<table class="table borderless">
+								<tbody>
+									<tr class="row">
+										<td class="col-lg-1">
+											<p class="card-text">
+												{{ $fixture->time_start }} <br>
+												{{ $fixture->team1->group->name }} <br>
+												{{ $fixture->pitch->name }}
+											</p>
+										</td>
+										<td class="text-right col-lg-5">
+											<span class="" style="font-size: calc(15px + (100vw - 1024px) / (1200 - 1024) * (21 - 18))">{{ $fixture->team1->name }}</span>
+										</td>
+										<td class="text-center col-lg-1">
+											<span style="font-size: calc(15px + (100vw - 1024px) / (1200 - 1024) * (21 - 18))">0 - 0</span>
+										</td>
+										<td class="col-lg-5">
+											<span style="font-size: calc(15px + (100vw - 1024px) / (1200 - 1024) * (21 - 18))">{{ $fixture->team2->name }}</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					@endforeach
 				</div>
 			</div>
 			@endforeach
