@@ -54,11 +54,57 @@ Route::group(['prefix' => 'live-score'], function () {
             $score->team_one = 0;
             $score->team_two = 0;
             $score->save();
-        }
 
+            $fixture->team1->standing->mp += 1;
+            $fixture->team1->standing->save();
+
+            $fixture->team2->standing->mp += 1;
+            $fixture->team2->standing->save();
+        }
+        
+        // dd($fixture->team1->players);
+        
         return view('fixtures.livescore', compact('fixture', 'score'));
     });
+
+    Route::get('{fixture_id}/add-goal/{player_id}/{team}', function ($fixture_id, $player_id, $team) {
+        $player = Player::findOrFail($player_id);
+        $player->goals += 1;
+        $player->save();
+        $fixture = Fixtures::findOrFail($fixture_id);
+
+        if ($team == 1) {
+            $score = Score::where('fixture_id', $fixture->id)->first();
+            $score->team_one += 1;
+            $score->save();
+        }
+        if ($team == 2) {
+            $score = Score::where('fixture_id', $fixture->id)->first();
+            $score->team_two += 1;
+            $score->save();
+        }
+
+        return redirect()->back();
+    });
+
+    Route::get('{fixture_id}/add-yellow/{player_id}/{team}', function ($fixture_id, $player_id, $team) {
+        $player = Player::findOrFail($player_id);
+        $player->yellow += 1;
+        $player->save();
+        
+        return redirect()->back();
+    });
+
+    Route::get('{fixture_id}/add-red/{player_id}/{team}', function ($fixture_id, $player_id, $team) {
+        $player = Player::findOrFail($player_id);
+        $player->red += 1;
+        $player->save();
+        
+        return redirect()->back();
+    });
 });
+
+
 
 
 

@@ -53,7 +53,7 @@ class PlayerController extends Controller
         // $player->assists = $request->assists;
         $player->save();
 
-        return redirect('players')->with('alert-success', 'Successfully added player');
+        return redirect('player/create')->with('alert-success', 'Successfully added player');
     }
 
     /**

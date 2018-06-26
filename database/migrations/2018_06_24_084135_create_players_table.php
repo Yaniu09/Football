@@ -19,9 +19,9 @@ class CreatePlayersTable extends Migration
             $table->string('name')->nullable();
             $table->string('number')->nullable();
             $table->string('position')->nullable();
-            $table->string('yellow')->nullable();
-            $table->string('red')->nullable();
-            $table->string('goals')->nullable();
+            $table->string('yellow')->default(0)->nullable();
+            $table->string('red')->default(0)->nullable();
+            $table->string('goals')->default(0)->nullable();
             $table->string('assists')->nullable();
             $table->timestamps();
         });

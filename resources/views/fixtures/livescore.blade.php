@@ -23,12 +23,32 @@
 			</div>
 			<div class="row">
 				<div class="col-lg-10 mx-auto">
-					<div class="col-lg-8 mx-auto">
-						<form action="{{ url()->current() }}" method="POST">
-							@csrf
-							
-						</form>
-					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>{{ $fixture->team1->name }} - Score: {{ $score->team_one }}</th>
+								<th>{{ $fixture->team2->name }} - Score: {{ $score->team_two }}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									@foreach($fixture->team1->players as $player)
+										{{ $player->number }} - {{ $player->name }} <a class="btn btn-success btn-sm" href="{{ url()->current() }}/add-goal/{{ $player->id }}/1">Add Goal</a> <a class="btn btn-warning btn-sm" href="{{ url()->current() }}/add-yellow/{{ $player->id }}/1">Add Yellow</a> <a class="btn btn-danger btn-sm" href="{{ url()->current() }}/add-red/{{ $player->id }}/1">Add Red Card</a>
+										<br>
+										<br>
+									@endforeach
+								</td>
+								<td>
+									@foreach($fixture->team2->players as $player)
+										{{ $player->number }} - {{ $player->name }} <a class="btn btn-success btn-sm" href="{{ url()->current() }}/add-goal/{{ $player->id }}/2">Add Goal</a> <a class="btn btn-warning btn-sm" href="{{ url()->current() }}/add-yellow/{{ $player->id }}/2">Add Yellow</a> <a class="btn btn-danger btn-sm" href="{{ url()->current() }}/add-red/{{ $player->id }}/2">Add Red Card</a>
+										<br>
+										<br>
+									@endforeach
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
