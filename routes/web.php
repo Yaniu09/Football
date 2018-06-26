@@ -13,11 +13,6 @@ use Illuminate\Http\Request;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
 
 Route::get('/', function () {
@@ -26,6 +21,8 @@ Route::get('/', function () {
     
     return view('welcome', compact('groups','fixtures'));
 });
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'fixtures'], function () {
     Route::get('/', 'FixturesController@index');
@@ -47,9 +44,23 @@ Route::group(['prefix' => 'player'], function () {
     Route::post('/edit/{player}', 'PlayerController@update');
 });
 
+Route::group(['prefix' => 'live-score'], function () {
+    Route::get('{id}', function ($id) {
+        $fixtures = Fixtures::findOrFail($id);
+
+        return view('fixture.livescore');
+    });
+});
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Test Routes Below (Delete these later)
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/add-score/{fixture_id}/{score_1}/{score_2}', 'ScoreController@add_score');
 Route::get('/table-update', 'StandingsController@table_update');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

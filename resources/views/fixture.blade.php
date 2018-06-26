@@ -37,7 +37,7 @@
 						<div class="fixture">
 							<table class="table borderless">
 								<tbody>
-									<tr class="row">
+									<tr class="clickable-row row" data-href="/live-score/{{ $fixture->id }}">
 										<td class="col-lg-1">
 											<p class="card-text">
 												{{ $fixture->time_start }} <br>
@@ -140,10 +140,19 @@
       </div>
     </div>
 	@include('partials.footer')
+	
+@endsection
+
+@section('js')
 	<script>
 		$('.datepicker').datepicker({
 			format: 'dd/mm/yyyy'
 		});
+
+		jQuery(document).ready(function($) {
+			$(".clickable-row").click(function() {
+				window.location = $(this).data("href");
+			});
+		});
 	</script>
-  </body>
-</html>
+@endsection
