@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
+use App\Teams;
+use App\Fixtures;
+use App\Pitch;
+use App\Standings;
+use App\Score;
 use App\Player;
 use Illuminate\Http\Request;
 

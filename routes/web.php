@@ -46,9 +46,17 @@ Route::group(['prefix' => 'player'], function () {
 
 Route::group(['prefix' => 'live-score'], function () {
     Route::get('{id}', function ($id) {
-        $fixtures = Fixtures::findOrFail($id);
+        $fixture = Fixtures::findOrFail($id);
+        $score = Score::where('fixture_id', $fixture->id)->first();
+        if ($score === null) {
+            $score = new Score;
+            $score->fixture_id = $fixture->id;
+            $score->team_one = 0;
+            $score->team_two = 0;
+            $score->save();
+        }
 
-        return view('fixture.livescore');
+        return view('fixtures.livescore', compact('fixture', 'score'));
     });
 });
 
