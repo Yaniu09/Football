@@ -40,6 +40,11 @@ Route::group(['prefix' => 'player'], function () {
     Route::get('/create', 'PlayerController@create');
     Route::post('/create', 'PlayerController@store');
 
+    Route::get('/top', function () {
+        $goals = Player::orderBy('goals')->get();
+        return view('players.top', compact('goals'));
+    });
+
     Route::get('/edit/{player}', 'PlayerController@edit');
     Route::post('/edit/{player}', 'PlayerController@update');
 });
@@ -47,6 +52,11 @@ Route::group(['prefix' => 'player'], function () {
 Route::group(['prefix' => 'live-score'], function () {
     Route::get('{id}', function ($id) {
         $fixture = Fixtures::findOrFail($id);
+        
+        if ($fixture->match_end == 1) {
+            return redirect()->back();
+        }
+
         $score = Score::where('fixture_id', $fixture->id)->first();
         if ($score === null) {
             $score = new Score;
@@ -101,6 +111,53 @@ Route::group(['prefix' => 'live-score'], function () {
         $player->save();
         
         return redirect()->back();
+    });
+
+    Route::get('{fixture_id}/{score_id}/finish-match', function ($fixture_id, $score_id) {
+        $fixture = Fixtures::findOrFail($fixture_id);
+        $score = Score::findOrFail($score_id);
+
+        $score_1 = $score->team_one;
+        $score_2 = $score->team_two;
+        if ($score_1 == $score_2) {
+            $score->draw = '1';
+        }
+        $score->save();
+
+        $standing_one = Standings::where('team_id', $fixture->team_one_id)->first();
+        if ($score_1 > $score_2) {
+            $standing_one->w += 1;
+        }
+        if ($score_1 == $score_2) {
+            $standing_one->d += 1;
+        }
+        if ($score_1 < $score_2) {
+            $standing_one->l += 1;
+        }
+        $standing_one->gf += $score_1;
+        $standing_one->ga += $score_2;
+        $standing_one->save();
+
+        // ------------------------------------------- //
+
+        $standing_two = Standings::where('team_id', $fixture->team_two_id)->first();
+        if ($score_1 > $score_2) {
+            $standing_two->w += 1;
+        }
+        if ($score_1 == $score_2) {
+            $standing_two->d += 1;
+        }
+        if ($score_1 < $score_2) {
+            $standing_two->l += 1;
+        }
+        $standing_two->gf += $score_2;
+        $standing_two->ga += $score_1;
+        $standing_two->save();
+
+        $fixture->match_end = 1;
+        $fixture->save();
+
+        return redirect('table-update');
     });
 });
 

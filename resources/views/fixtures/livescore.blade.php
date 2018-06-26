@@ -22,7 +22,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-10 mx-auto">
+				<div class="col-lg-12 mx-auto">
 					<table class="table">
 						<thead>
 							<tr>
@@ -34,14 +34,14 @@
 							<tr>
 								<td>
 									@foreach($fixture->team1->players as $player)
-										{{ $player->number }} - {{ $player->name }} <a class="btn btn-success btn-sm" href="{{ url()->current() }}/add-goal/{{ $player->id }}/1">Add Goal</a> <a class="btn btn-warning btn-sm" href="{{ url()->current() }}/add-yellow/{{ $player->id }}/1">Add Yellow</a> <a class="btn btn-danger btn-sm" href="{{ url()->current() }}/add-red/{{ $player->id }}/1">Add Red Card</a>
+										{{ $player->number }} - {{ $player->name }} <a class="btn btn-success btn-sm" href="{{ url()->current() }}/add-goal/{{ $player->id }}/1">Add Goal ({{ $player->goals }})</a> <a class="btn btn-warning btn-sm" href="{{ url()->current() }}/add-yellow/{{ $player->id }}/1">Add Yellow Card ({{ $player->yellow }})</a> <a class="btn btn-danger btn-sm" href="{{ url()->current() }}/add-red/{{ $player->id }}/1">Add Red Card ({{ $player->red }})</a>
 										<br>
 										<br>
 									@endforeach
 								</td>
 								<td>
 									@foreach($fixture->team2->players as $player)
-										{{ $player->number }} - {{ $player->name }} <a class="btn btn-success btn-sm" href="{{ url()->current() }}/add-goal/{{ $player->id }}/2">Add Goal</a> <a class="btn btn-warning btn-sm" href="{{ url()->current() }}/add-yellow/{{ $player->id }}/2">Add Yellow</a> <a class="btn btn-danger btn-sm" href="{{ url()->current() }}/add-red/{{ $player->id }}/2">Add Red Card</a>
+										{{ $player->number }} - {{ $player->name }} <a class="btn btn-success btn-sm" href="{{ url()->current() }}/add-goal/{{ $player->id }}/2">Add Goal ({{ $player->goals }})</a> <a class="btn btn-warning btn-sm" href="{{ url()->current() }}/add-yellow/{{ $player->id }}/2">Add Yellow Card ({{ $player->yellow }})</a> <a class="btn btn-danger btn-sm" href="{{ url()->current() }}/add-red/{{ $player->id }}/2">Add Red Card ({{ $player->red }})</a>
 										<br>
 										<br>
 									@endforeach
@@ -49,6 +49,8 @@
 							</tr>
 						</tbody>
 					</table>
+					<hr>
+					<a class="btn btn-block btn-warning" href="{{ url()->current() }}/{{ $score->id }}/finish-match">End Match</a>
 				</div>
 			</div>
 		</div>

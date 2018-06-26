@@ -22,6 +22,7 @@ class CreateFixturesTable extends Migration
             $table->string('date')->nullable();
             $table->string('time_start')->nullable();
             $table->string('time_end')->nullable();
+            $table->string('match_end')->default('0')->nullable();
             $table->timestamps();
         });
     }
