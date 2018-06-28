@@ -19,6 +19,8 @@
           <hr>
         </center>
       @endforeach
+      <a href="fixtures" class="btn btn-success btn-lg">View All</a>
+      
     </div>
   </section>
 
