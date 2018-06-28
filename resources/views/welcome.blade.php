@@ -22,8 +22,10 @@
     </div>
     <div class="card-body">
         @foreach ($fixtures as $fixture)
+          @if ($fixture->match_end == 1)
           <h6 class="card-title">FT</h6>
-          <h5 class="card-title">{{ $fixture->team1->name }} |  <span> 0 - 0 </span>  | {{ $fixture->team2->name }}</h5>
+          @endif
+          <h5 class="card-title">{{ $fixture->team1->name }} |  <span> {{ $fixture->score->team_one }} - {{ $fixture->score->team_two }} </span>  | {{ $fixture->team2->name }}</h5>
           <p class="card-text">{{ $fixture->date }} | {{ $fixture->time_start }} - {{ $fixture->time_end }} | {{ $fixture->pitch->name }}</p>
           <hr>
         @endforeach

@@ -6,7 +6,7 @@
 		<div class="col-lg-8 mx-auto">
 			@foreach ($groups as $group)
 				<h3>{{ $group->name }}</h3>
-				<table class="table table-sm table-dark">
+				<table class="table table-sm">
 					<thead>
 						<tr>
 						<th scope="col">Team</th>

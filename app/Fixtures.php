@@ -20,4 +20,9 @@ class Fixtures extends Model
     {
         return $this->belongsTo('App\Pitch', 'pitch_id');
     }
+
+    public function score()
+    {
+        return $this->hasOne('App\Score', 'fixture_id');
+    }
 }
