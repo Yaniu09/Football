@@ -10,7 +10,11 @@
           @if ($fixture->match_end == 1)
             <h6>FT</h6>
           @endif
-          <h5>{{ $fixture->team1->name }} | {{ $fixture->score->team_one }} - {{ $fixture->score->team_two }} | {{ $fixture->team2->name }}</h5>
+          @if ($fixture->score !== null)
+            <h5>{{ $fixture->team1->name }} | {{ $fixture->score->team_one }} - {{ $fixture->score->team_two }} | {{ $fixture->team2->name }}</h5>
+          @else
+            <h5>{{ $fixture->team1->name }} | 0 - 0 | {{ $fixture->team2->name }}</h5>
+          @endif      
           <p>{{ $fixture->date }} | {{ $fixture->time_start }} - {{ $fixture->time_end }} | {{ $fixture->pitch->name }}</p>
           <hr>
         </center>

@@ -19,6 +19,8 @@ Route::get('/', function () {
     $groups = Group::all();
     $fixtures = Fixtures::all();
     
+    // dd($fixtures[0]->score);
+
     return view('welcome', compact('groups','fixtures'));
 });
 Auth::routes();
@@ -130,38 +132,43 @@ Route::group(['prefix' => 'live-score'], function () {
         }
         $score->save();
 
-        $standing_one = Standings::where('team_id', $fixture->team_one_id)->first();
-        if ($score_1 > $score_2) {
-            $standing_one->w += 1;
-        }
-        if ($score_1 == $score_2) {
-            $standing_one->d += 1;
-        }
-        if ($score_1 < $score_2) {
-            $standing_one->l += 1;
-        }
+        $standing_one = Standings::find($fixture->team_one_id);
+        $standing_one->mp += 1;
+        
         $standing_one->gf += $score_1;
         $standing_one->ga += $score_2;
         $standing_one->save();
 
         // ------------------------------------------- //
 
-        $standing_two = Standings::where('team_id', $fixture->team_two_id)->first();
+        $standing_two = Standings::find($fixture->team_two_id);
+        $standing_two->mp += 1;
+        $standing_two->gf += $score_1;
+        $standing_two->ga += $score_2;
+        $standing_two->save();
+
+        // ------------------------------------------- //
+        
         if ($score_1 > $score_2) {
-            $standing_two->w += 1;
+            $standing_one->w += 1;
+            $standing_one->save();
+
+            $standing_two->l += 1;
+            $standing_two->save();
         }
         if ($score_1 == $score_2) {
+            $standing_one->d += 1;
+            $standing_one->save();
+
             $standing_two->d += 1;
         }
         if ($score_1 < $score_2) {
-            $standing_two->l += 1;
-        }
-        $standing_two->gf += $score_2;
-        $standing_two->ga += $score_1;
-        $standing_two->save();
+            $standing_one->l += 1;
+            $standing_one->save();
 
-        $fixture->match_end = 1;
-        $fixture->save();
+            $standing_two->w += 1;
+            $standing_one->save();
+        }
 
         return redirect('table-update');
     });
