@@ -8,6 +8,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+
     <title>METRO FUTSAL CUP</title>
     <style>
     .content {

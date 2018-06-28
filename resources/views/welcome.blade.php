@@ -28,12 +28,12 @@
     
   </section>
 
-  <section id="about">
+  {{-- <section id="about">
     <div class="container text-center" style="margin-bottom: 100px; margin-top: 100px;">
       <h2 class="title">About Us</h2>
       
     </div>
-  </section>
+  </section> --}}
   
 
 @endsection

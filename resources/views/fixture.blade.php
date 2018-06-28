@@ -5,10 +5,7 @@
 @endsection
 
 @section('content')
-	<div class="container text-center">
-		<h2 class="title">Fixtures <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add">Add</button></h1>
-		<p class="lead"></p>
-	</div>
+	
 	<section>
 		<div class="container">
 			<div class="row">
@@ -22,55 +19,39 @@
 					@endforeach
 				</div>
 			</div>
-			<div class="container text-center" style="margin-bottom: 100px; margin-top: 100px;">
-				<h2 class="title">Matches</h2>
-				@foreach ($fixtures as $fixture)
-				  <center>
-					@if ($fixture->match_end == 1)
-					  <h6>FT</h6>
+		</div>
+		<div class="container text-center">
+			<h1 class="title">Fixtures 
+				@if (Auth::check())
+					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#add">Add</button>
+				@endif
+			</h1>
+			
+			@foreach ($dates as $date)
+				<h3>{{ Carbon\Carbon::createFromFormat('d/m/Y', $date[0]->date)->format('l j F') }}</h3>
+				<hr>
+				<br>
+				@foreach ($date as $fixture)
+				<center>
+					@if (Auth::check())
+					<a href="/live-score/{{ $fixture->id }}">
 					@endif
-					<h5>{{ $fixture->team1->name }} | {{ $fixture->score->team_one }} - {{ $fixture->score->team_two }} | {{ $fixture->team2->name }}</h5>
-					<p>{{ $fixture->date }} | {{ $fixture->time_start }} - {{ $fixture->time_end }} | {{ $fixture->pitch->name }}</p>
-					<hr>
-				  </center>
+						@if ($fixture->match_end == 1)
+						<h6>FT</h6>
+						@endif
+						@if ($fixture->score !== null)
+							<h5>{{ $fixture->team1->name }} | {{ $fixture->score->team_one }} - {{ $fixture->score->team_two }} | {{ $fixture->team2->name }}</h5>
+						@else
+							<h5>{{ $fixture->team1->name }} | 0 - 0 | {{ $fixture->team2->name }}</h5>
+						@endif
+						<p>{{ $fixture->date }} | {{ $fixture->time_start }} - {{ $fixture->time_end }} | {{ $fixture->pitch->name }}</p>
+					@if (Auth::check())
+					</a>
+					@endif
+				</center>
 				@endforeach
-			  </div>
-			{{-- @foreach ($dates as $date)
-			<div class="card">
-				<div class="card-header">
-					{{ Carbon\Carbon::createFromFormat('d/m/Y', $date[0]->date)->format('l j F') }}
-				</div>
-				<div class="card-body">
-					<h5 class="card-title"></h5>
-					@foreach ($date as $fixture)
-						<div class="fixture">
-							<table class="table borderless">
-								<tbody>
-									<tr class="clickable-row row" data-href="/live-score/{{ $fixture->id }}">
-										<td class="col-lg-1">
-											<p class="card-text">
-												{{ $fixture->time_start }} <br>
-												{{ $fixture->team1->group->name }} <br>
-												{{ $fixture->pitch->name }}
-											</p>
-										</td>
-										<td class="text-right col-lg-5">
-											<span class="" style="font-size: calc(15px + (100vw - 1024px) / (1200 - 1024) * (21 - 18))">{{ $fixture->team1->name }}</span>
-										</td>
-										<td class="text-center col-lg-1">
-											<span style="font-size: calc(15px + (100vw - 1024px) / (1200 - 1024) * (21 - 18))">0 - 0</span>
-										</td>
-										<td class="col-lg-5">
-											<span style="font-size: calc(15px + (100vw - 1024px) / (1200 - 1024) * (21 - 18))">{{ $fixture->team2->name }}</span>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					@endforeach
-				</div>
-			</div>
-			@endforeach --}}
+				<hr>
+			@endforeach
 		</div>
 	</section>
 

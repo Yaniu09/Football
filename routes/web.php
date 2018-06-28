@@ -28,14 +28,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'fixtures'], function () {
     Route::get('/', 'FixturesController@index');
-    Route::post('/', 'FixturesController@store');
-    Route::get('/edit/{fixtures}', 'FixturesController@edit');
-    Route::post('/edit/{fixtures}', 'FixturesController@update');
+    Route::post('/', 'FixturesController@store')->middleware('auth');
+    Route::get('/edit/{fixtures}', 'FixturesController@edit')->middleware('auth');
+    Route::post('/edit/{fixtures}', 'FixturesController@update')->middleware('auth');
 });
 
 Route::group(['prefix' => 'standings'], function () {
-    Route::get('/', 'StandingsController@index');
-    Route::get('/create', 'StandingsController@create');
+    Route::get('/', 'StandingsController@index')->middleware('auth');
+    Route::get('/create', 'StandingsController@create')->middleware('auth');
     Route::get('/table', function () {
         $groups = Group::all();
         $fixtures = Fixtures::all();
@@ -45,16 +45,16 @@ Route::group(['prefix' => 'standings'], function () {
 });
 
 Route::group(['prefix' => 'player'], function () {
-    Route::get('/create', 'PlayerController@create');
-    Route::post('/create', 'PlayerController@store');
+    Route::get('/create', 'PlayerController@create')->middleware('auth');
+    Route::post('/create', 'PlayerController@store')->middleware('auth');
 
     Route::get('/top', function () {
         $goals = Player::orderBy('goals')->get();
         return view('players.top', compact('goals'));
     });
 
-    Route::get('/edit/{player}', 'PlayerController@edit');
-    Route::post('/edit/{player}', 'PlayerController@update');
+    Route::get('/edit/{player}', 'PlayerController@edit')->middleware('auth');
+    Route::post('/edit/{player}', 'PlayerController@update')->middleware('auth');
 });
 
 Route::group(['prefix' => 'live-score'], function () {
@@ -83,7 +83,7 @@ Route::group(['prefix' => 'live-score'], function () {
         // dd($fixture->team1->players);
         
         return view('fixtures.livescore', compact('fixture', 'score'));
-    });
+    })->middleware('auth');
 
     Route::get('{fixture_id}/add-goal/{player_id}/{team}', function ($fixture_id, $player_id, $team) {
         $player = Player::findOrFail($player_id);
@@ -103,7 +103,7 @@ Route::group(['prefix' => 'live-score'], function () {
         }
 
         return redirect()->back();
-    });
+    })->middleware('auth');
 
     Route::get('{fixture_id}/add-yellow/{player_id}/{team}', function ($fixture_id, $player_id, $team) {
         $player = Player::findOrFail($player_id);
@@ -111,7 +111,7 @@ Route::group(['prefix' => 'live-score'], function () {
         $player->save();
         
         return redirect()->back();
-    });
+    })->middleware('auth');
 
     Route::get('{fixture_id}/add-red/{player_id}/{team}', function ($fixture_id, $player_id, $team) {
         $player = Player::findOrFail($player_id);
@@ -119,7 +119,7 @@ Route::group(['prefix' => 'live-score'], function () {
         $player->save();
         
         return redirect()->back();
-    });
+    })->middleware('auth');
 
     Route::get('{fixture_id}/{score_id}/finish-match', function ($fixture_id, $score_id) {
         $fixture = Fixtures::findOrFail($fixture_id);
@@ -171,7 +171,7 @@ Route::group(['prefix' => 'live-score'], function () {
         }
 
         return redirect('table-update');
-    });
+    })->middleware('auth');
 });
 
 
@@ -186,8 +186,5 @@ Route::group(['prefix' => 'live-score'], function () {
 |--------------------------------------------------------------------------
 */
 
-Route::get('/add-score/{fixture_id}/{score_1}/{score_2}', 'ScoreController@add_score');
-Route::get('/table-update', 'StandingsController@table_update');
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/add-score/{fixture_id}/{score_1}/{score_2}', 'ScoreController@add_score')->middleware('auth');
+Route::get('/table-update', 'StandingsController@table_update')->middleware('auth');
