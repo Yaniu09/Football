@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="container text-center">
-		<h2 style="margin-bottom: 50px;">Tournament Standings</h2>
+		<h2 style="margin-bottom: 50px;">Tournament Standings <button class="btn btn-danger btn-sm">LIVE</button> </h2>
 	</div>
 	<div class="row">
 		<div class="col-lg-8 col-md-12 col-s-12 col-xs-12 mx-auto">

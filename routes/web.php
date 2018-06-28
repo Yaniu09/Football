@@ -31,6 +31,22 @@ Route::group(['prefix' => 'fixtures'], function () {
     Route::post('/', 'FixturesController@store')->middleware('auth');
     Route::get('/edit/{fixtures}', 'FixturesController@edit')->middleware('auth');
     Route::post('/edit/{fixtures}', 'FixturesController@update')->middleware('auth');
+
+    Route::get('/live-5', function () {
+        $groups = Group::all();
+        $fixtures = Fixtures::take(5)->get();
+        
+        return view('fixtures.live-5', compact('groups', 'fixtures'));
+    });
+    Route::get('/live-all', function () {
+        $data = Fixtures::all();
+        $dates = $data->groupBy('date');
+        // dd($dates->toArray());
+        $groups = Group::all();
+        $pitches = Pitch::all();
+
+        return view('fixtures.live', compact('dates', 'fixtures', 'groups', 'pitches'));
+    });    
 });
 
 Route::group(['prefix' => 'standings'], function () {
@@ -49,7 +65,7 @@ Route::group(['prefix' => 'player'], function () {
     Route::post('/create', 'PlayerController@store')->middleware('auth');
 
     Route::get('/top', function () {
-        $goals = Player::orderBy('goals')->get();
+        $goals = Player::where('goals', '>=', '1')->orderBy('goals', 'desc')->take('10')->get();
         return view('players.top', compact('goals'));
     });
 
