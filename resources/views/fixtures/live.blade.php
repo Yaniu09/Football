@@ -13,7 +13,7 @@
             @foreach ($date as $fixture)
             <center>
                 @if (Auth::check())
-                <a href="/live-score/{{ $fixture->id }}">
+                <a href="/live-score/{{ $fixture->id }}" onclick="return confirm('Are you sure you would like to start the match.This would change the standings(MP) of both teams This process cannot be reversed.')">
                 @endif
                     @if ($fixture->match_end == 1)
                     <h6>FT</h6>
