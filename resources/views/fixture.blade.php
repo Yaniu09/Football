@@ -22,8 +22,20 @@
 					@endforeach
 				</div>
 			</div>
-
-			@foreach ($dates as $date)
+			<div class="container text-center" style="margin-bottom: 100px; margin-top: 100px;">
+				<h2 class="title">Matches</h2>
+				@foreach ($fixtures as $fixture)
+				  <center>
+					@if ($fixture->match_end == 1)
+					  <h6>FT</h6>
+					@endif
+					<h5>{{ $fixture->team1->name }} | {{ $fixture->score->team_one }} - {{ $fixture->score->team_two }} | {{ $fixture->team2->name }}</h5>
+					<p>{{ $fixture->date }} | {{ $fixture->time_start }} - {{ $fixture->time_end }} | {{ $fixture->pitch->name }}</p>
+					<hr>
+				  </center>
+				@endforeach
+			  </div>
+			{{-- @foreach ($dates as $date)
 			<div class="card">
 				<div class="card-header">
 					{{ Carbon\Carbon::createFromFormat('d/m/Y', $date[0]->date)->format('l j F') }}
@@ -58,7 +70,7 @@
 					@endforeach
 				</div>
 			</div>
-			@endforeach
+			@endforeach --}}
 		</div>
 	</section>
 
