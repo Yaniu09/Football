@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 
 Route::get('/', function () {
     $groups = Group::all();
-    $fixtures = Fixtures::all();
+    $fixtures = Fixtures::take(5)->get();
     
     // dd($fixtures[0]->score);
 
