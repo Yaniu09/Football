@@ -42,14 +42,14 @@
 <script>
   $(function() {
     loadlink(); 
-    setInterval(function(){
-      loadlink() 
-    }, 5000);
   });
   function loadlink(){
-    $('#links').load('standings/table',function () {
+    $('#standings').load('standings/table',function () {
       $(this).unwrap();
     });
   }
+  setInterval(function(){
+    loadlink() 
+  }, 5000);
 </script>
 @endsection
