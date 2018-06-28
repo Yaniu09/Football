@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" id="mainNav">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
   <div class="container">
     <a class="navbar-brand js-scroll-trigger" href="#page-top" style="font-weight:bold;">METRO FUTSAL CUP 2018</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
