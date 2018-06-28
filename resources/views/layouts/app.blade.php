@@ -21,6 +21,19 @@
     .title {
       margin-bottom: 50px;
     }
+    
+    @media (max-width: 575.98px) {
+      .hide-sm {
+        display: none;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .hide-sm {
+        display: none;
+      }
+    }
+
     </style>
 
     <!-- Bootstrap core CSS -->

@@ -10,12 +10,14 @@
     
   </section>
 
-  {{-- <section id="about">
+  <section id="about">
     <div class="container text-center" style="margin-bottom: 100px; margin-top: 100px;">
       <h2 class="title">About Us</h2>
-      
+      <p>Metro Fustsal Cup is an annual futsal tournament organized by Metro Fitness Group to promote unity amongst the youth. The tournament is a youth-led platform which aims to use futsal as a tool to promote the values of unity, reconciliation and encourage development among youth with the goal to lead a healthy lifestyle. Metro Fitness Group has also been proative in spreading messages of unity by encouraging youth to gain a better understanding of others and respect their peers.</p>
+      <hr>
+      <img src="/img/sponsor.png" width="100%">
     </div>
-  </section> --}}
+  </section>
   
 
 @endsection
