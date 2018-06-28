@@ -7,7 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 class CreateFixturesTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrationhs.
      *
      * @return void
      */
