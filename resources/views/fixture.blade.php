@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-	<div class="container text-center" style="margin-top: 100px; margin-bottom: 50px;">
-		<h2 >Fixtures <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add">Add</button></h1>
+	<div class="container text-center">
+		<h2 class="title">Fixtures <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add">Add</button></h1>
 		<p class="lead"></p>
 	</div>
 	<section>
@@ -135,9 +135,7 @@
 			</div>
         </div>
       </div>
-    </div>
-	@include('partials.footer')
-	
+    </div>	
 @endsection
 
 @section('js')

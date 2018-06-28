@@ -13,7 +13,7 @@
 					@endif
 				@endforeach
 				</div>
-				<h1 style="margin-top: 100px; margin-bottom: 50px;">Top Payers</h1>
+				<h1 class="title">Top Payers</h1>
 			</div>
 			<div class="row">
 				<div class="col-lg-8 mx-auto">

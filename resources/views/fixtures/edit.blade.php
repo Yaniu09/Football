@@ -1,14 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <header class="bg-primary text-white">
-			<div class="container text-center">
-				<h1>Fixtures</h1>
-				<p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
-			</div>
-    </header>
-
-	<section id="standings">
+    <section id="standings">
 		<div class="container">
 			<div class="container text-center">
 				<div class="flash-message">
@@ -20,7 +13,7 @@
 					@endif
 				@endforeach
 				</div>
-				<h1>Add New Payers</h1>
+				<h1 class="title">Edit Fixtures</h1>
 			</div>
 			<div class="row">
 				<div class="col-lg-8 mx-auto">

@@ -4,7 +4,7 @@
   
   <section id="matches">
     <div class="container text-center" style="margin-bottom: 100px; margin-top: 100px;">
-      <h2 style="margin-bottom: 50px;">Matches</h2>
+      <h2 class="title">Matches</h2>
       @foreach ($fixtures as $fixture)
         <center>
           @if ($fixture->match_end == 1)
@@ -24,7 +24,7 @@
 
   <section id="about">
     <div class="container text-center" style="margin-bottom: 100px; margin-top: 100px;">
-      <h2 style="margin-bottom: 50px;">About Us</h2>
+      <h2 class="title">About Us</h2>
       
     </div>
   </section>

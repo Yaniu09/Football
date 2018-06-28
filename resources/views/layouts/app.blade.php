@@ -10,8 +10,15 @@
 
     <title>METRO FUTSAL CUP</title>
     <style>
-      
-      </style>
+    .content {
+      min-height: 500px;
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+    .title {
+      margin-bottom: 50px;
+    }
+    </style>
 
     <!-- Bootstrap core CSS -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -24,8 +31,10 @@
   <body id="page-top">
     @include('partials.header')
     
+    <div class="content">
     @yield('content')
-    
+    </div>
+
     @include('partials.footer')
     
     @yield('js')

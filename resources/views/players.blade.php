@@ -13,7 +13,7 @@
                   @endif
                 @endforeach
               </div>
-        <h1>Add New Payers</h1>
+        <h1 class="title">Add New Payers</h1>
         </div>
       <div class="row">
         <div class="col-lg-8 mx-auto">

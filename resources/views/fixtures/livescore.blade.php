@@ -1,14 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <header class="bg-primary text-white">
-			<div class="container text-center">
-				<h1>Live Score</h1>
-				<p class="lead"></p>
-			</div>
-    </header>
-
-	<section id="standings">
+    <section id="standings">
 		<div class="container">
 			<div class="container text-center">
 				<div class="flash-message">
@@ -20,6 +13,7 @@
 					@endif
 				@endforeach
 				</div>
+				<h1 class="title">Live Score</h1>
 			</div>
 			<div class="row">
 				<div class="col-lg-12 mx-auto">
