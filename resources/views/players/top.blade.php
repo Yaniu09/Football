@@ -3,7 +3,7 @@
 @section('content')
   <header class="bg-dark text-white header">
 		<div class="container text-center">
-			<p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
+			<p class="lead"></p>
 		</div>
   </header> 
 

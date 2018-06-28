@@ -181,3 +181,6 @@ Route::group(['prefix' => 'live-score'], function () {
 
 Route::get('/add-score/{fixture_id}/{score_1}/{score_2}', 'ScoreController@add_score');
 Route::get('/table-update', 'StandingsController@table_update');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
