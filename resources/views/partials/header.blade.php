@@ -8,15 +8,17 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#">Matches</a>
+          <a class="nav-link js-scroll-trigger" href="/#matches">Matches</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#standings">Standings</a>
+          <a class="nav-link js-scroll-trigger" href="/#standings">Standings</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="#contact">About</a>
+          <a class="nav-link js-scroll-trigger" href="/#about">About</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+
+<img src="/img/banner.png" style="width:100%;">

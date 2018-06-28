@@ -5,13 +5,10 @@
 @endsection
 
 @section('content')
-    <header class="bg-primary text-white">
-			<div class="container text-center">
-				<h1>Fixtures <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add">Add</button></h1>
-				<p class="lead"></p>
-			</div>
-    </header>
-	
+	<div class="container text-center" style="margin-top: 100px; margin-bottom: 50px;">
+		<h2 >Fixtures <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add">Add</button></h1>
+		<p class="lead"></p>
+	</div>
 	<section>
 		<div class="container">
 			<div class="row">

@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="container text-center">
-		<h1>Tournament Standings</h1>
+		<h2 style="margin-bottom: 50px;">Tournament Standings</h2>
 	</div>
 	<div class="row">
 		<div class="col-lg-8 mx-auto">

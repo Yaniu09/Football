@@ -1,13 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-  <header class="bg-dark text-white header">
-		<div class="container text-center">
-			<p class="lead"></p>
-		</div>
-  </header> 
-
-
 	<section id="standings">
 		<div class="container">
 			<div class="container text-center">
@@ -20,7 +13,7 @@
 					@endif
 				@endforeach
 				</div>
-				<h1>Top Payers</h1>
+				<h1 style="margin-top: 100px; margin-bottom: 50px;">Top Payers</h1>
 			</div>
 			<div class="row">
 				<div class="col-lg-8 mx-auto">
