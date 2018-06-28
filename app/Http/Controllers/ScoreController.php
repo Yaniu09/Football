@@ -124,13 +124,13 @@ class ScoreController extends Controller
 
         $standing_two = Standings::find($fixture->team_two_id);
         $standing_two->mp += 1;
-        if ($score_1 > $score_2) {
+        if ($score_1 < $score_2) {
             $standing_two->w += 1;
         }
         if ($score_1 == $score_2) {
             $standing_two->d += 1;
         }
-        if ($score_1 < $score_2) {
+        if ($score_1 > $score_2) {
             $standing_two->l += 1;
         }
         $standing_two->gf += $score_1;
