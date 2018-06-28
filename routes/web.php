@@ -34,6 +34,12 @@ Route::group(['prefix' => 'fixtures'], function () {
 Route::group(['prefix' => 'standings'], function () {
     Route::get('/', 'StandingsController@index');
     Route::get('/create', 'StandingsController@create');
+    Route::get('/table', function () {
+        $groups = Group::all();
+        $fixtures = Fixtures::all();
+        
+        return view('standings.table', compact('groups'));
+    });
 });
 
 Route::group(['prefix' => 'player'], function () {

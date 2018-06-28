@@ -31,6 +31,9 @@
   </div>
 
   <section id="standings">
+<<<<<<< HEAD
+    
+=======
     <div class="container">
         <div class="container text-center">
         <h1>Tournament Standings</h1>
@@ -67,5 +70,25 @@
         </div>
       </div>
     </div>
+>>>>>>> cb7d765f5c02cacde8f6c3eaece9a2f3164b00a8
   </section>
+
+
+
+@endsection
+
+@section('js')
+<script>
+  $(function() {
+    loadlink(); 
+    setInterval(function(){
+      loadlink() 
+    }, 5000);
+  });
+  function loadlink(){
+    $('#links').load('standings/table',function () {
+      $(this).unwrap();
+    });
+  }
+</script>
 @endsection
