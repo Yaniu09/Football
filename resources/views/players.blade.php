@@ -3,7 +3,7 @@
 @section('content')
   <header class="bg-dark text-white header">
     <div class="container text-center">
-      <p class="lead"></p>
+      <img src="/img/BG.jpg">
     </div>
   </header> 
 

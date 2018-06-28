@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-  <header class="bg-dark text-white header">
-    <div class="container text-center">
-      <p class="lead"></p>
-    </div>
-  </header> 
+  {{-- <header class="bg-dark text-white header"> --}}
+    
+      <img src="/img/BG.jpg" style="width:100%; height:350px">
+    
+  {{-- </header>  --}}
 
-  <div class="card text-center">
+  <div class="card text-center" style="border-bottom:none;">
     <div class="card-header">
       <center>
         <ul class="nav nav-pills card-header-pills">
@@ -21,11 +21,12 @@
       </center>
     </div>
     <div class="card-body">
-      @foreach ($fixtures as $fixture)
+        @foreach ($fixtures as $fixture)
         <h6 class="card-title">FT</h6>
         <h5 class="card-title">{{ $fixture->team1->name }} |  <span> 0 - 0 </span>  | {{ $fixture->team2->name }}</h5>
         <p class="card-text">{{ $fixture->date }} | {{ $fixture->time_start }} - {{ $fixture->time_end }} | {{ $fixture->pitch->name }}</p>
-      @endforeach
+        <hr>
+        @endforeach
     </div>
   </div>
 
@@ -38,7 +39,7 @@
         <div class="col-lg-8 mx-auto">
           @foreach ($groups as $group)
             <h3>{{ $group->name }}</h3>
-            <table class="table table-sm table-dark">
+            <table class="table table-sm ">
               <thead>
                 <tr>
                   <th scope="col">Team</th>
@@ -52,7 +53,7 @@
               <tbody>
                   @foreach ($group->teams as $team)
                   <tr>
-                    <th scope="row">{{ $team->name }}</th>
+                    <th scope="row" style="font-weight:normal;">{{ $team->name }}</th>
                     <td>{{ $team->standing->mp }}</td>
                     <td>{{ $team->standing->gf }}</td>
                     <td>{{ $team->standing->ga }}</td>
