@@ -13,10 +13,24 @@
 					@endif
 				@endforeach
 				</div>
-				<h1 class="title">Top Payers</h1>
+				<h1 class="title">Top Scorers</h1>
 			</div>
 			<div class="row">
 				<div class="col-lg-8 mx-auto">
+						<div class="card text-center">
+								<div class="card-header">
+								  Top 10
+								</div>
+								<div class="card-body">
+								@foreach ($goals as $goal)
+								  <h5 class="card-title">	
+							    	{{ $goal->name }} - Jersy {{ $goal->number }}
+								  </h5>
+								  <p class="card-text">Goals {{ $goal->goals }}</p>
+								  <hr>
+								  @endforeach
+								</div>
+							  </div>
 					<ul>
 						@foreach ($goals as $goal)
 							<li>Jersy {{ $goal->number }} - {{ $goal->name }} - Goals {{ $goal->goals }}</li>
