@@ -23,7 +23,7 @@
                     @else
                         <h5>{{ $fixture->team1->name }} | 0 - 0 | {{ $fixture->team2->name }}</h5>
                     @endif
-                    <p>{{ $fixture->date }} | {{ $fixture->time_start }} - {{ $fixture->time_end }} | {{ $fixture->pitch->name }}</p>
+                    <p>{{ $fixture->date }} | {{ $fixture->time_start }} - {{ $fixture->time_end }} | {{ $fixture->pitch->name }} | {{ $fixture->team1->group->name }}</p>
                 @if (Auth::check())
                 </a>
                 @endif

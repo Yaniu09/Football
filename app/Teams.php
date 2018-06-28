@@ -18,6 +18,6 @@ class Teams extends Model
 
     public function players()
     {
-        return $this->hasMany('App\Player', 'team_id');
+        return $this->hasMany('App\Player', 'team_id')->orderBy('number', 'asc');
     }
 }
