@@ -11,8 +11,8 @@
 						<tr>
 						<th scope="col">Team</th>
 						<th scope="col">MP</th>
-						<th class="d-s-none" scope="col">GF</th>
-						<th class="d-s-none" scope="col">GA</th>
+						<th scope="col">GF</th>
+						<th scope="col">GA</th>
 						<th scope="col">GD</th>
 						<th scope="col">Pts</th>
 						</tr>
@@ -22,8 +22,8 @@
 						<tr>
 							<th scope="row">{{ $team->name }}</th>
 							<td>{{ $team->standing->mp }}</td>
-							<td class="d-s-none">{{ $team->standing->gf }}</td>
-							<td class="d-s-none">{{ $team->standing->ga }}</td>
+							<td>{{ $team->standing->gf }}</td>
+							<td>{{ $team->standing->ga }}</td>
 							<td>{{ $team->standing->gd }}</td>
 							<td>{{ $team->standing->pts }}</td>
 						</tr>
