@@ -29,10 +29,9 @@
 								<td>
 									@foreach($fixture->team1->players as $player)
 										{{ $player->number }} - {{ $player->name }} 
-											onclick="return confirm('Are you sure you would like to delete this accomodation. This process cannot be reversed.')"
-										<a class="btn btn-success btn-sm"  href="{{ url()->current() }}/add-goal/{{ $player->id }}/1">Goal ({{ $player->goals }})</a> 
-										<a class="btn btn-warning btn-sm" href="{{ url()->current() }}/add-yellow/{{ $player->id }}/1">Yellow Card ({{ $player->yellow }})</a> 
-										<a class="btn btn-danger btn-sm" href="{{ url()->current() }}/add-red/{{ $player->id }}/1">Red Card ({{ $player->red }})</a>
+										<a class="btn btn-success btn-sm"  href="{{ url()->current() }}/add-goal/{{ $player->id }}/1" onclick="return confirm('Are you sure you would like to add a goal. This process cannot be reversed.')">Goal ({{ $player->goals }})</a> 
+										<a class="btn btn-warning btn-sm" href="{{ url()->current() }}/add-yellow/{{ $player->id }}/1" onclick="return confirm('Are you sure you would like to add a yellow card. This process cannot be reversed.')">Yellow Card ({{ $player->yellow }})</a> 
+										<a class="btn btn-danger btn-sm" href="{{ url()->current() }}/add-red/{{ $player->id }}/1" onclick="return confirm('Are you sure you would like to add a red card. This process cannot be reversed.')">Red Card ({{ $player->red }})</a>
 										<br>
 										<br>
 									@endforeach
@@ -40,9 +39,9 @@
 								<td>
 									@foreach($fixture->team2->players as $player)
 										{{ $player->number }} - {{ $player->name }} 
-										<a class="btn btn-success btn-sm" href="{{ url()->current() }}/add-goal/{{ $player->id }}/2">Goal ({{ $player->goals }})</a> 
-										<a class="btn btn-warning btn-sm" href="{{ url()->current() }}/add-yellow/{{ $player->id }}/2">Yellow Card ({{ $player->yellow }})</a> 
-										<a class="btn btn-danger btn-sm" href="{{ url()->current() }}/add-red/{{ $player->id }}/2">Red Card ({{ $player->red }})</a>
+										<a class="btn btn-success btn-sm" href="{{ url()->current() }}/add-goal/{{ $player->id }}/2" onclick="return confirm('Are you sure you would like to add a goal. This process cannot be reversed.')">Goal ({{ $player->goals }})</a> 
+										<a class="btn btn-warning btn-sm" href="{{ url()->current() }}/add-yellow/{{ $player->id }}/2"  onclick="return confirm('Are you sure you would like to add a yellow card. This process cannot be reversed.')">Yellow Card ({{ $player->yellow }})</a> 
+										<a class="btn btn-danger btn-sm" href="{{ url()->current() }}/add-red/{{ $player->id }}/2" onclick="return confirm('Are you sure you would like to add a red card. This process cannot be reversed.')">Red Card ({{ $player->red }})</a>
 										<br>
 										<br>
 									@endforeach
