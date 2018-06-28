@@ -22,10 +22,10 @@
     </div>
     <div class="card-body">
         @foreach ($fixtures as $fixture)
-        <h6 class="card-title">FT</h6>
-        <h5 class="card-title">{{ $fixture->team1->name }} |  <span> 0 - 0 </span>  | {{ $fixture->team2->name }}</h5>
-        <p class="card-text">{{ $fixture->date }} | {{ $fixture->time_start }} - {{ $fixture->time_end }} | {{ $fixture->pitch->name }}</p>
-        <hr>
+          <h6 class="card-title">FT</h6>
+          <h5 class="card-title">{{ $fixture->team1->name }} |  <span> 0 - 0 </span>  | {{ $fixture->team2->name }}</h5>
+          <p class="card-text">{{ $fixture->date }} | {{ $fixture->time_start }} - {{ $fixture->time_end }} | {{ $fixture->pitch->name }}</p>
+          <hr>
         @endforeach
     </div>
   </div>
