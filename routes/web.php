@@ -55,7 +55,7 @@ Route::group(['prefix' => 'standings'], function () {
     Route::get('/table', function () {
         $groups = Group::all();
         $fixtures = Fixtures::all();
-        
+
         return view('standings.table', compact('groups'));
     });
 });
@@ -193,7 +193,7 @@ Route::group(['prefix' => 'live-score'], function () {
     })->middleware('auth');
 });
 
-
+Route::get('/table-update', 'StandingsController@table_update')->middleware('auth');
 
 
 
@@ -206,4 +206,4 @@ Route::group(['prefix' => 'live-score'], function () {
 */
 
 Route::get('/add-score/{fixture_id}/{score_1}/{score_2}', 'ScoreController@add_score')->middleware('auth');
-Route::get('/table-update', 'StandingsController@table_update')->middleware('auth');
+
