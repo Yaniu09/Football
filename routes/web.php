@@ -206,4 +206,80 @@ Route::get('/table-update', 'StandingsController@table_update')->middleware('aut
 */
 
 Route::get('/add-score/{fixture_id}/{score_1}/{score_2}', 'ScoreController@add_score')->middleware('auth');
+Route::get('fix-table', function () {
+    $fixtures = Fixtures::all();
 
+    // -----------------------------
+    // Reset Standings
+    // -----------------------------
+    $standings = Standings::all();
+    foreach ($standings as $standing) {
+        $standing->delete();
+    }
+
+    $groups = Group::all();
+    foreach ($groups as $group) {
+        foreach ($group->teams as $team) {
+            $standing = new Standings;
+            $standing->group_id = $group->id;
+            $standing->team_id = $team->id;
+            $standing->save();
+        }
+    }
+    // ----------------------
+
+
+    foreach ($fixtures as $fixture) {
+        $score = $fixture->score;
+
+        $score_1 = $score->team_one;
+        $score_2 = $score->team_two;
+        if ($score_1 == $score_2) {
+            $score->draw = '1';
+        }
+        $score->save();
+
+        // ---------------------------------
+        // Standing One
+        // ---------------------------------
+        $standing_one = Standings::where('team_id', $fixture->team_one_id)->first();
+        $standing_one->gf += $score_1;
+        $standing_one->ga += $score_2;
+        $standing_one->save();
+
+        // ---------------------------------
+        // Standing Two
+        // ---------------------------------
+        $standing_two = Standings::where('team_id', $fixture->team_two_id)->first();
+        $standing_two->ga += $score_1;
+        $standing_two->gf += $score_2;
+        $standing_two->save();
+
+        // --------------------------------- //
+
+        if ($score_1 > $score_2) {
+            $standing_one->w += 1;
+            $standing_one->save();
+
+            $standing_two->l += 1;
+            $standing_two->save();
+        }
+        if ($score_1 == $score_2) {
+            $standing_one->d += 1;
+            $standing_one->save();
+
+            $standing_two->d += 1;
+            $standing_two->save();
+        }
+        if ($score_1 < $score_2) {
+            $standing_one->l += 1;
+            $standing_one->save();
+
+            $standing_two->w += 1;
+            $standing_two->save();
+        }
+    }
+
+    return redirect('table-update');
+    
+})->middleware('auth');
