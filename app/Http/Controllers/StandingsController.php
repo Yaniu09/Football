@@ -110,6 +110,7 @@ class StandingsController extends Controller
             $team->gd = $standing->gd;
             $team->save();
         }
+
         return redirect('/');
     }
 }

@@ -18,15 +18,31 @@
 						</tr>
 					</thead>
 					<tbody>
+						<?php 
+							$positive = [];
+							$negative = [];
+						?>
 						@foreach ($group->teams as $team)
-						<tr>
-							<th scope="row">{{ $team->name }}</th>
-							<td>{{ $team->standing->mp }}</td>
-							<td class="hide-sm">{{ $team->standing->gf }}</td>
-							<td class="hide-sm">{{ $team->standing->ga }}</td>
-							<td>{{ $team->standing->gd }}</td>
-							<td>{{ $team->standing->pts }}</td>
-						</tr>
+							<?php 
+								if ($team->gd >= 0) {
+									array_push($positive, $team);
+								}
+								if ($team->gd < 0) {
+									array_push($negative, $team);
+								}
+								$combined = array_merge($positive, array_reverse($negative));
+							?>
+						@endforeach
+						
+						@foreach ($combined as $team)
+							<tr>
+								<th scope="row">{{ $team->name }}</th>
+								<td>{{ $team->standing->mp }}</td>
+								<td class="hide-sm">{{ $team->standing->gf }}</td>
+								<td class="hide-sm">{{ $team->standing->ga }}</td>
+								<td>{{ $team->standing->gd }}</td>
+								<td>{{ $team->standing->pts }}</td>
+							</tr>
 						@endforeach
 					</tbody>
 				</table>
