@@ -107,6 +107,7 @@ class StandingsController extends Controller
 
             $team = Teams::find($standing->team_id);
             $team->pts = $standing->pts;
+            $team->gd = $standing->gd;
             $team->save();
         }
         return redirect('/');

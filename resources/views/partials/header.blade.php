@@ -14,6 +14,9 @@
           <a class="nav-link js-scroll-trigger" href="/#standings">Standings</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/player/top">Top Scorers</a>
+          </li>
+        <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="/#about">About</a>
         </li>
       </ul>
